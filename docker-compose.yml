@@ -1,0 +1,32 @@
+version: "3.8"
+
+services:
+  gateway:
+    build:
+      context: ./gateway
+    ports:
+      - "6500:6500"
+    depends_on:
+      - profile
+      - sponsor
+    networks:
+      - netfolio
+
+  profile:
+    build:
+      context: ./profile
+    ports:
+      - "6501:6501"
+    networks:
+      - netfolio
+
+  sponsor:
+    build:
+      context: ./sponsor
+    ports:
+      - "6502:6502"
+    networks:
+      - netfolio
+
+networks:
+  netfolio:

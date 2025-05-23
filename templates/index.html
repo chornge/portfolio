@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Portfolio - {{.Name}}</title>
+    <link rel="stylesheet" href="../static/style.css" />
+  </head>
+  <body>
+    <div data-aos="fade-up" class="container">
+      <header>
+        <h2>{{.Name}}</h2>
+        <p>
+          <a href="mailto:{{.Email}}">{{.Email}}</a> |
+          <a href="{{.LinkedIn}}">LinkedIn</a> |
+          <a href="{{.Github}}">GitHub</a> |
+          <a href="{{.StackOverflow}}">StackOverflow</a>
+        </p>
+      </header>
+
+      <section>
+        <h2>Education</h2>
+        <p>{{.Education}}</p>
+      </section>
+
+      <section>
+        <h2>Side Projects</h2>
+        {{range .SideProjects}}
+        <div class="card">
+          <h3><a href="{{.Link}}" target="_blank">{{.Title}}</a></h3>
+          <p>{{.Description}}</p>
+          <p>- {{.Technologies}}</p>
+        </div>
+        {{end}}
+      </section>
+
+      <section>
+        <h2>Resume</h2>
+        <embed
+          src="../static/christian+mbaba_resume.pdf"
+          type="application/pdf"
+          width="100%"
+          height="550px"
+        />
+        <p>
+          <a href="../static/christian+mbaba_resume.pdf" download
+            >Download Resume</a
+          >
+        </p>
+      </section>
+
+      <section>
+        <h2>App Links</h2>
+        {{range .WorkProjects}}
+        <div class="experience-mini">
+          <span>{{.Company}}</span>
+          {{ if ne .AppLink "" }}
+          <span>
+            -
+            <a href="{{ .AppLink }}" target="_blank">App on Play Store</a></span
+          >
+          {{ end }}
+        </div>
+        <hr />
+        {{end}}
+      </section>
+
+      <section>
+        <h2>Book a Meeting</h2>
+        <iframe
+          src="{{.CalendlyURL}}"
+          width="100%"
+          height="900"
+          frameborder="0"
+        ></iframe>
+      </section>
+    </div>
+  </body>
+</html>
