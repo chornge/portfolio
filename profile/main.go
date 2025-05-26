@@ -2,9 +2,8 @@ package main
 
 import (
 	"fmt"
-	"html/template"
-
 	"github.com/gin-gonic/gin"
+	"html/template"
 )
 
 func main() {
@@ -16,7 +15,7 @@ func main() {
 	//router.StaticFile("/favicon.ico", "../static/favicon.ico")
 	router.GET("/", profileHandler)
 
-	fmt.Printf("Server listening on http://localhost:%s\n", port)
+	fmt.Printf("Server listening on http://0.0.0.0:%s\n", port)
 	router.Run(":" + port)
 }
 
@@ -106,7 +105,7 @@ func profileHandler(c *gin.Context) {
 				Title:        "Portfolio",
 				Description:  "Developer portfolio site with contact info, education, projects & work experience. Payment processor & DB in progress.",
 				Technologies: "Go, HTML, CSS, Microservices, Docker, Gin, Tollbooth (rate limiting)",
-				Link:         "http://localhost:6500/",
+				Link:         "http://0.0.0.0:6500/",
 			},
 			{
 				Title:        "Wish and Swish",
