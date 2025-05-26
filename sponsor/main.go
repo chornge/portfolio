@@ -13,7 +13,7 @@ func main() {
 	router := gin.Default()
 
 	router.Static("/static", "../static")
-	//router.StaticFile("/favicon.ico", "../static/favicon.ico")
+	router.StaticFile("/favicon.ico", "../static/favicon.ico")
 	router.GET("/", sponsorHandler)
 
 	fmt.Printf("Server listening on http://0.0.0.0:%s\n", port)
