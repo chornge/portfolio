@@ -1,5 +1,6 @@
 services:
   gateway:
+    image: "chornge.io/portfolio-gateway:main"
     build:
       context: ./gateway
       dockerfile: Dockerfile
@@ -12,19 +13,17 @@ services:
       - sponsor
 
   profile:
+    image: "chornge.io/portfolio-profile:main"
     build:
       context: .
       dockerfile: profile/Dockerfile
     ports:
       - "6501:6501"
-    expose:
-      - "6501"
 
   sponsor:
+    image: "chornge.io/portfolio-sponsor:main"
     build:
       context: .
       dockerfile: sponsor/Dockerfile
     ports:
       - "6502:6502"
-    expose:
-      - "6502"
