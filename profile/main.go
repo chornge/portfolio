@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"html/template"
 
+	common "github.com/chornge/portfolio-common"
 	"github.com/gin-gonic/gin"
 )
 
@@ -23,7 +24,7 @@ func main() {
 func profileHandler(c *gin.Context) {
 	tmpl := template.Must(template.ParseFiles("../templates/index.html"))
 
-	data := PageData{
+	data := common.PageData{
 		Name:          "Christian Mbaba",
 		Email:         "Christianmbaba@live.com",
 		Github:        "https://www.github.com/chornge",
@@ -31,7 +32,7 @@ func profileHandler(c *gin.Context) {
 		StackOverflow: "https://www.stackoverflow.com/users/1008011/chornge",
 		Education:     "Bachelor of Science, Computer Science - Sam Houston State University (2014)",
 		CalendlyURL:   "https://www.calendly.com/christianmbaba/30min",
-		WorkProjects: []WorkProject{
+		WorkProjects: []common.WorkProject{
 			{
 				Company: "USAA",
 				Role:    "Senior Android Developer",
@@ -89,11 +90,11 @@ func profileHandler(c *gin.Context) {
 				AppLink: "https://play.google.com/store/apps/details?id=com.viewlift.hoichoi",
 			},
 		},
-		SideProjects: []SideProject{
+		SideProjects: []common.SideProject{
 			{
 				Title:        "Audio Epistles",
 				Description:  "Fetches a video from any public YouTube playlist, extract the audio, title, thumbnail & publishes it as a podcast on Spotify.",
-				Technologies: "Rust, Node, FFmpeg, Schroedinger-Hat API (youtube-to-spotify), Cron",
+				Technologies: "Rust, Node, FFmpeg, Cron",
 				Link:         "https://github.com/chornge/audio-epistles",
 			},
 			{
@@ -119,24 +120,4 @@ func profileHandler(c *gin.Context) {
 
 	c.Writer.Header().Set("Content-Type", "text/html; charset=utf-8")
 	tmpl.Execute(c.Writer, data)
-}
-
-type WorkProject struct {
-	Company, Role, Period, Stack, AppLink string
-}
-
-type SideProject struct {
-	Title, Description, Technologies, Link string
-}
-
-type PageData struct {
-	Name          string
-	Email         string
-	Github        string
-	LinkedIn      string
-	StackOverflow string
-	Education     string
-	WorkProjects  []WorkProject
-	SideProjects  []SideProject
-	CalendlyURL   string
 }

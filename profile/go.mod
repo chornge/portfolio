@@ -1,4 +1,4 @@
-module github.com/chornge/portfolio/profile
+module github.com/chornge/portfolio-profile
 
 go 1.24.3
 

@@ -1,4 +1,4 @@
-module github.com/chornge/portfolio/sponsor
+module github.com/chornge/portfolio-sponsor
 
 go 1.24.3
 

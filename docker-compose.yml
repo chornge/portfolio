@@ -5,12 +5,15 @@ services:
       context: ./gateway
       dockerfile: Dockerfile
     ports:
-      - "80:80"
+      - "${NGINX_PORT}:${NGINX_PORT}"
     volumes:
       - ./gateway/nginx.conf:/etc/nginx/nginx.conf
     depends_on:
       - profile
       - sponsor
+    environment:
+      - PROFILE_PORT=${PROFILE_PORT}
+      - SPONSOR_PORT=${SPONSOR_PORT}
 
   profile:
     image: "chornge.io/portfolio-profile:main"
@@ -18,7 +21,9 @@ services:
       context: .
       dockerfile: profile/Dockerfile
     ports:
-      - "6501:6501"
+      - "${PROFILE_PORT}:${PROFILE_PORT}"
+    environment:
+      - PROFILE_PORT=${PROFILE_PORT}
 
   sponsor:
     image: "chornge.io/portfolio-sponsor:main"
@@ -26,4 +31,6 @@ services:
       context: .
       dockerfile: sponsor/Dockerfile
     ports:
-      - "6502:6502"
+      - "${SPONSOR_PORT}:${SPONSOR_PORT}"
+    environment:
+      - SPONSOR_PORT=${SPONSOR_PORT}
