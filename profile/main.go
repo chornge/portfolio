@@ -107,7 +107,7 @@ func profileHandler(c *gin.Context) {
 				Title:        "Portfolio",
 				Description:  "Developer portfolio site with contact info, education, projects & work experience. Payment processor & DB in progress.",
 				Technologies: "Go, HTML, CSS, Microservices, Docker, Nginx, Gin",
-				Link:         "/",
+				Link:         "javascript:void(0)",
 			},
 			{
 				Title:        "Wish and Swish",

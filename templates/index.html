@@ -27,7 +27,15 @@
         <h2>Side Projects</h2>
         {{range .SideProjects}}
         <div class="card">
-          <h3><a href="{{.Link}}" target="_blank">{{.Title}}</a></h3>
+          <h3>
+            <a href="{{if eq .Link "javascript:void(0)"}}javascript:void(0){{else}}{{.Link}}{{end}}" 
+               onclick="{{if eq .Link "javascript:void(0)"}}
+                         refreshCurrentPage(); 
+                         return false; 
+                         {{end}}">
+              {{.Title}}
+            </a>
+          </h3>
           <p>{{.Description}}</p>
           <p>- {{.Technologies}}</p>
         </div>
@@ -75,5 +83,11 @@
         ></iframe>
       </section>
     </div>
+
+    <script>
+      function refreshCurrentPage() {
+        location.reload();
+      }
+    </script>
   </body>
 </html>
