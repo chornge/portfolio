@@ -16,7 +16,7 @@ func main() {
 	router.StaticFile("/favicon.ico", "../static/favicon.ico")
 	router.GET("/", sponsorHandler)
 
-	fmt.Printf("Server listening on http://0.0.0.0:%s\n", port)
+	fmt.Printf("Server listening on http://localhost:%s\n", port)
 	router.Run(":" + port)
 }
 

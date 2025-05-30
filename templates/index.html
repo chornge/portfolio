@@ -6,10 +6,12 @@
     <link rel="stylesheet" href="../static/style.css" />
   </head>
   <body>
+    <script data-goatcounter="https://chornge.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
     <div class="container">
       <header>
         <h2>{{.Name}}</h2>
-        <h5>I enjoy making excellent tools &amp; feeling creative.</h5>
+        <h4>I create excellent tools that provide solutions</h4>
         <p>
           <a href="mailto:{{.Email}}">{{.Email}}</a> |
           <a href="{{.LinkedIn}}">LinkedIn</a> |
@@ -27,7 +29,7 @@
         <h2>Side Projects</h2>
         {{range .SideProjects}}
         <div class="card">
-          <h3>
+          <h4>
             <a href="{{if eq .Link "javascript:void(0)"}}javascript:void(0){{else}}{{.Link}}{{end}}" 
                onclick="{{if eq .Link "javascript:void(0)"}}
                          refreshCurrentPage(); 
@@ -35,7 +37,7 @@
                          {{end}}">
               {{.Title}}
             </a>
-          </h3>
+          </h4>
           <p>{{.Description}}</p>
           <p>- {{.Technologies}}</p>
         </div>
@@ -68,13 +70,14 @@
             <a href="{{ .AppLink }}" target="_blank">App on Play Store</a></span
           >
           {{ end }}
+          <span> - {{.Description}}</span>
         </div>
         <hr />
         {{end}}
       </section>
 
       <section>
-        <h2>Book a Meeting</h2>
+        <h2>Book a Session</h2>
         <iframe
           src="{{.CalendlyURL}}"
           width="100%"

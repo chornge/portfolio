@@ -1,3 +1,4 @@
+# Stage 1: Build
 FROM golang:1.24 AS builder
 
 WORKDIR /app
@@ -10,7 +11,7 @@ COPY ../static /app/static
 RUN go build -o bin/profile profile/main.go
 RUN chmod +x ./bin/profile
 
-# Use a smaller base image for the final image
+# Stage 2: Final image
 FROM debian:stable-slim
 WORKDIR /app
 

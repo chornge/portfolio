@@ -1,7 +1,7 @@
 package common
 
 type WorkProject struct {
-	Company, Role, Period, Stack, AppLink string
+	Company, Role, Period, Description, Stack, AppLink string
 }
 
 type SideProject struct {
