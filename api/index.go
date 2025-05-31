@@ -1,21 +1,21 @@
 package handler
 
 import (
-	"fmt"
 	"html/template"
 	"net/http"
+	"slices"
 
 	"github.com/gin-gonic/gin"
 )
 
 func CORSMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		allowedOrigin := "https://portfolio-mauve-one-j7kh9fwul9.vercel.app"
+		allowedOrigins := []string{"https://portfolio-mauve-one-j7kh9fwul9.vercel.app"}
 
 		// Get origin from request header
 		origin := c.Request.Header.Get("Origin")
-		if origin == allowedOrigin {
-			c.Writer.Header().Set("Access-Control-Allow-Origin", allowedOrigin)
+		if slices.Contains(allowedOrigins, origin) {
+			c.Writer.Header().Set("Access-Control-Allow-Origin", origin)
 		}
 
 		c.Writer.Header().Set("Access-Control-Allow-Credentials", "true")
@@ -31,7 +31,7 @@ func CORSMiddleware() gin.HandlerFunc {
 	}
 }
 
-func Handler(c *gin.Context) {
+func Handler(w http.ResponseWriter, r *http.Request) {
 	gin.SetMode(gin.ReleaseMode)
 	router := gin.Default()
 
@@ -42,9 +42,7 @@ func Handler(c *gin.Context) {
 
 	router.GET("/", ProfileHandler)
 
-	fmt.Println("Server running")
-
-	router.ServeHTTP(c.Writer, c.Request)
+	router.ServeHTTP(w, r)
 }
 
 func ProfileHandler(c *gin.Context) {
