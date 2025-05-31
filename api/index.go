@@ -8,22 +8,6 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func Handler() {
-	gin.SetMode(gin.ReleaseMode)
-	router := gin.Default()
-
-	router.Use(CORSMiddleware())
-
-	router.Static("/static", "../static")
-	router.StaticFile("/favicon.ico", "../static/favicon.ico")
-
-	router.GET("/", ProfileHandler)
-
-	fmt.Println("Server running")
-
-	router.Run()
-}
-
 func CORSMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		allowedOrigin := "https://portfolio-mauve-one-j7kh9fwul9.vercel.app"
@@ -45,6 +29,22 @@ func CORSMiddleware() gin.HandlerFunc {
 		}
 		c.Next()
 	}
+}
+
+func Handler(c *gin.Context) {
+	gin.SetMode(gin.ReleaseMode)
+	router := gin.Default()
+
+	router.Use(CORSMiddleware())
+
+	router.Static("/static", "../static")
+	router.StaticFile("/favicon.ico", "../static/favicon.ico")
+
+	router.GET("/", ProfileHandler)
+
+	fmt.Println("Server running")
+
+	router.ServeHTTP(c.Writer, c.Request)
 }
 
 func ProfileHandler(c *gin.Context) {
