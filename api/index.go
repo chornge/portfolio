@@ -14,13 +14,13 @@ func main() {
 
 	router.Static("/static", "../static")
 	router.StaticFile("/favicon.ico", "../static/favicon.ico")
-	router.GET("/", profileHandler)
+	router.GET("/", ProfileHandler)
 
 	fmt.Printf("Server listening on http://localhost:%s\n", port)
 	router.Run(":" + port)
 }
 
-func profileHandler(c *gin.Context) {
+func ProfileHandler(c *gin.Context) {
 	tmpl := template.Must(template.ParseFiles("../templates/index.html"))
 
 	data := PageData{
