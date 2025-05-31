@@ -101,7 +101,7 @@ func profileHandler(c *gin.Context) {
 		SideProjects: []common.SideProject{
 			{
 				Title:        "Portfolio",
-				Description:  "Developer portfolio site with contact info, education, projects, work experience & meeting details. (LIVE)",
+				Description:  "Developer portfolio page with contact info, projects & open source contributions. (LIVE)",
 				Technologies: "Microservices, Go, HTML, CSS, Docker, Nginx",
 				Link:         "https://github.com/chornge/portfolio",
 			},
