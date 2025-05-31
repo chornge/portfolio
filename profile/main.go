@@ -103,7 +103,7 @@ func profileHandler(c *gin.Context) {
 				Title:        "Portfolio",
 				Description:  "Developer portfolio site with contact info, education, projects, work experience & meeting details. (LIVE)",
 				Technologies: "Microservices, Go, HTML, CSS, Docker, Nginx",
-				Link:         "javascript:void(0)",
+				Link:         "https://github.com/chornge/portfolio",
 			},
 			{
 				Title:        "Audio Epistles",
