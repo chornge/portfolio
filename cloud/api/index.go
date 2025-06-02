@@ -179,7 +179,7 @@
 // 	CalendlyURL   string
 // }
 
-package main
+package handler
 
 import (
 	"html/template"
@@ -197,4 +197,3 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 	})
 	router.ServeHTTP(w, r)
 }
-
