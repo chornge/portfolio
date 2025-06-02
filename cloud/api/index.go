@@ -39,8 +39,10 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 
 	router.Use(CORSMiddleware())
 
-	router.Static("/static", "../../static")
-	router.StaticFile("/favicon.ico", "../../static/favicon.ico")
+	// router.Static("/static", "../../static")
+	router.Static("/static", "static")
+	// router.StaticFile("/favicon.ico", "../../static/favicon.ico")
+	router.StaticFile("/favicon.ico", "static/favicon.ico")
 
 	router.GET("/", ProfileHandler)
 
@@ -48,7 +50,8 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 }
 
 func ProfileHandler(c *gin.Context) {
-	tmpl := template.Must(template.ParseFiles("../../templates/index.html"))
+	// tmpl := template.Must(template.ParseFiles("../../templates/index.html"))
+	tmpl := template.Must(template.ParseFiles("templates/index.html"))
 
 	data := PageData{
 		Name:          "Christian Mbaba",

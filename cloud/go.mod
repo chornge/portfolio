@@ -2,7 +2,10 @@ module github.com/chornge/portfolio-cloud-api
 
 go 1.24.3
 
-require github.com/gin-gonic/gin v1.10.1
+require (
+	github.com/gin-gonic/gin v1.10.1
+	github.com/vercel/vercel-go-bridge v0.3.0
+)
 
 require (
 	github.com/aws/aws-lambda-go v1.48.0 // indirect
