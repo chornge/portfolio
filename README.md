@@ -2,6 +2,8 @@
 
 Welcome 🖖🏽 my name is Christian. I am an Android Developer.
 
+Actual portfolio located at https://portfolio-mauve-one-j7kh9fwul9.vercel.app/api
+
 ![](http://estruyf-github.azurewebsites.net/api/VisitorHit?user=chornge&repo=portfolio)
 
 ### Languages & Tools 🛠
@@ -11,11 +13,9 @@ Welcome 🖖🏽 my name is Christian. I am an Android Developer.
 
 ### Open Source Analytics ⚙️
 
-![Github Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=chornge&layout=compact&count_private=true)
+![Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=chornge&layout=compact&count_private=true)
 
-![Github Statistics](https://github-readme-stats.vercel.app/api/?username=chornge&count_private=true&show_icons=true)
-
-![Github Contributions](https://github-readme-streak-stats.herokuapp.com/?user=chornge&hide_border=false)
+![Statistics](https://github-readme-stats.vercel.app/api/?username=chornge&count_private=true&show_icons=true)
 
 ### Let's connect!
 

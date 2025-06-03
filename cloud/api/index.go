@@ -179,19 +179,19 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 		SideProjects: []SideProject{
 			{
 				Title:        "Audio Epistles",
-				Description:  "Grabs a video from any public YouTube playlist, extracts its audio, title, etc & publishes as a podcast. (LIVE)",
+				Description:  "Grabs a video from any public YouTube playlist, extracts its audio, title, etc & publishes as a podcast.",
 				Technologies: "Rust, Node, FFmpeg, Cron, Spotify",
 				Link:         "https://github.com/chornge/audio-epistles",
 			},
 			{
 				Title:        "Drone-VAR (SkyJudge)",
-				Description:  "A user with \"any\" video drone can detect offsides occurring in realtime during a soccer match. (WIP)",
+				Description:  "A user with \"any\" video drone can detect offsides occurring in realtime during a soccer match. (Awaiting Sponsors)",
 				Technologies: "Rust, MavLink, Candle, ONNX",
 				Link:         "https://github.com/chornge/sky-judge",
 			},
 			{
 				Title:        "Wish and Swish",
-				Description:  "Automatically opens a trash can when the word \"KOBE\" is spoken. It aims to make waste disposals hands-free. (WIP)",
+				Description:  "Makes waste disposals hands-free by automatically opening a trash can when the word \"KOBE\" is spoken. (In Progress)",
 				Technologies: "Rust, Raspberry Pi, FFmpeg, Rustpotter-cli, rppal",
 				Link:         "https://github.com/chornge/wish_and_swish",
 			},
