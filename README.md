@@ -1,4 +1,4 @@
-<h3><img src="https://emojis.slackmojis.com/emojis/images/1531849430/4246/blob-sunglasses.gif?1531849430" width="30"/> Hello! </h3> <hr>
+<h3><img src="https://emojis.slackmojis.com/emojis/images/1531849430/4246/blob-sunglasses.gif?1531849430" width="30"/>Hello!</h3> <hr>
 
 Welcome 🖖🏽 my name is Christian. I am an Android Developer.
 
