@@ -1,30 +1,108 @@
-package main
+package handler
 
 import (
-	"fmt"
 	"html/template"
-
-	common "github.com/chornge/portfolio-common"
-	"github.com/gin-gonic/gin"
+	"net/http"
 )
 
-func main() {
-	port := "6501"
-	gin.SetMode(gin.ReleaseMode)
-	router := gin.Default()
+func Handler(w http.ResponseWriter, r *http.Request) {
+	tmpl := template.New("profile")
 
-	router.Static("/static", "../static")
-	router.StaticFile("/favicon.ico", "../static/favicon.ico")
-	router.GET("/", profileHandler)
+	tmpl.Parse(`
+		<!DOCTYPE html>
+		<html lang="en">
+		<head>
+			<meta charset="UTF-8" />
+			<title>Portfolio - {{.Name}}</title>
+			<link rel="stylesheet" href="../style.css" />
+		</head>
+		<body>
+			<script data-goatcounter="https://chornge.goatcounter.com/count"
+				async src="//gc.zgo.at/count.js"></script>
+			<div class="container">
+			<header>
+				<h2>{{.Name}}</h2>
+				<h4>I create excellent tools that provide solutions</h4>
+				<p>
+				<a href="mailto:{{.Email}}">{{.Email}}</a> |
+				<a href="{{.LinkedIn}}">LinkedIn</a> |
+				<a href="{{.Github}}">GitHub</a> |
+				<a href="{{.StackOverflow}}">StackOverflow</a>
+				</p>
+			</header>
 
-	fmt.Printf("Server listening on http://localhost:%s\n", port)
-	router.Run(":" + port)
-}
+			<section>
+				<h2>Education</h2>
+				<p>{{.Education}}</p>
+			</section>
 
-func profileHandler(c *gin.Context) {
-	tmpl := template.Must(template.ParseFiles("../templates/index.html"))
+			<section>
+				<h2>Side Projects</h2>
+				{{range .SideProjects}}
+				<div class="card">
+				<h4>
+					<a href="{{if eq .Link "javascript:void(0)"}}javascript:void(0){{else}}{{.Link}}{{end}}" 
+					onclick="{{if eq .Link "javascript:void(0)"}}
+								refreshCurrentPage(); 
+								return false; 
+								{{end}}">
+					{{.Title}}
+					</a>
+				</h4>
+				<p>{{.Description}}</p>
+				<p>- {{.Technologies}}</p>
+				</div>
+				{{end}}
+			</section>
 
-	data := common.PageData{
+			<section>
+				<h2>Resume</h2>
+				<embed
+				src="../christian+mbaba_resume.pdf"
+				type="application/pdf"
+				width="100%"
+				height="550px"
+				/>
+				<p>
+				<a href="../christian+mbaba_resume.pdf" download
+					>Download Resume</a
+				>
+				</p>
+			</section>
+
+			<section>
+				<h2>App Links</h2>
+				{{range .WorkProjects}}
+				<div class="experience-mini">
+				<span>{{.Company}}</span>
+				{{ if ne .AppLink "" }}
+				<span>
+					-
+					<a href="{{ .AppLink }}" target="_blank">App on Play Store</a></span
+				>
+				{{ end }}
+				<span> - {{.Description}}</span>
+				</div>
+				<hr />
+				{{end}}
+			</section>
+
+			<section>
+				<h2>Book a Session</h2>
+				<iframe
+				src="{{.CalendlyURL}}"
+				width="100%"
+				height="900"
+				frameborder="0"
+				></iframe>
+			</section>
+			</div>
+		</body>
+		</html>
+
+	`)
+
+	data := PageData{
 		Name:          "Christian Mbaba",
 		Email:         "Christianmbaba@live.com",
 		Github:        "https://www.github.com/chornge",
@@ -32,7 +110,7 @@ func profileHandler(c *gin.Context) {
 		StackOverflow: "https://www.stackoverflow.com/users/1008011/chornge",
 		Education:     "Bachelor of Science, Computer Science - Sam Houston State University (2014)",
 		CalendlyURL:   "https://www.calendly.com/christianmbaba/30min",
-		WorkProjects: []common.WorkProject{
+		WorkProjects: []WorkProject{
 			{
 				Company:     "USAA",
 				Role:        "Senior Android Developer",
@@ -98,13 +176,7 @@ func profileHandler(c *gin.Context) {
 				AppLink:     "https://play.google.com/store/apps/details?id=com.viewlift.hoichoi",
 			},
 		},
-		SideProjects: []common.SideProject{
-			{
-				Title:        "Portfolio",
-				Description:  "Developer portfolio page with contact info, projects & open source contributions. (LIVE)",
-				Technologies: "Microservices, Go, HTML, CSS, Docker, Nginx",
-				Link:         "https://github.com/chornge/portfolio",
-			},
+		SideProjects: []SideProject{
 			{
 				Title:        "Audio Epistles",
 				Description:  "Grabs a video from any public YouTube playlist, extracts its audio, title, etc & publishes as a podcast. (LIVE)",
@@ -126,6 +198,26 @@ func profileHandler(c *gin.Context) {
 		},
 	}
 
-	c.Writer.Header().Set("Content-Type", "text/html; charset=utf-8")
-	tmpl.Execute(c.Writer, data)
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
+	tmpl.Execute(w, data)
+}
+
+type WorkProject struct {
+	Company, Role, Period, Description, Stack, AppLink string
+}
+
+type SideProject struct {
+	Title, Description, Technologies, Link string
+}
+
+type PageData struct {
+	Name          string
+	Email         string
+	Github        string
+	LinkedIn      string
+	StackOverflow string
+	Education     string
+	WorkProjects  []WorkProject
+	SideProjects  []SideProject
+	CalendlyURL   string
 }
