@@ -3,55 +3,104 @@ package handler
 import (
 	"html/template"
 	"net/http"
-	// "slices"
-
-	"github.com/gin-gonic/gin"
 )
 
-func CORSMiddleware() gin.HandlerFunc {
-	return func(c *gin.Context) {
-		// allowedOrigins := []string{"https://portfolio-mauve-one-j7kh9fwul9.vercel.app"}
-
-		// Get origin from request header
-		// origin := c.Request.Header.Get("Origin")
-		// if slices.Contains(allowedOrigins, origin) {
-		// 	c.Writer.Header().Set("Access-Control-Allow-Origin", origin)
-		// }
-
-		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
-
-		c.Writer.Header().Set("Access-Control-Allow-Credentials", "true")
-		c.Writer.Header().Set("Access-Control-Allow-Headers", "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With")
-		c.Writer.Header().Set("Access-Control-Allow-Methods", "POST, OPTIONS, GET, PUT, DELETE")
-
-		// Handle preflight requests
-		if c.Request.Method == "OPTIONS" {
-			c.AbortWithStatus(http.StatusNoContent)
-			return
-		}
-		c.Next()
-	}
-}
-
 func Handler(w http.ResponseWriter, r *http.Request) {
-	gin.SetMode(gin.ReleaseMode)
-	router := gin.Default()
+	tmpl := template.New("profile")
 
-	router.Use(CORSMiddleware())
+	tmpl.Parse(`
+		<!DOCTYPE html>
+		<html lang="en">
+		<head>
+			<meta charset="UTF-8" />
+			<title>Portfolio - {{.Name}}</title>
+			<link rel="stylesheet" href="../style.css" />
+		</head>
+		<body>
+			<script data-goatcounter="https://chornge.goatcounter.com/count"
+				async src="//gc.zgo.at/count.js"></script>
+			<div class="container">
+			<header>
+				<h2>{{.Name}}</h2>
+				<h4>I create excellent tools that provide solutions</h4>
+				<p>
+				<a href="mailto:{{.Email}}">{{.Email}}</a> |
+				<a href="{{.LinkedIn}}">LinkedIn</a> |
+				<a href="{{.Github}}">GitHub</a> |
+				<a href="{{.StackOverflow}}">StackOverflow</a>
+				</p>
+			</header>
 
-	// router.Static("/static", "../../static")
-	router.Static("/static", "/static")
-	// router.StaticFile("/favicon.ico", "../../static/favicon.ico")
-	router.StaticFile("/favicon.ico", "/static/favicon.ico")
+			<section>
+				<h2>Education</h2>
+				<p>{{.Education}}</p>
+			</section>
 
-	router.GET("/", ProfileHandler)
+			<section>
+				<h2>Side Projects</h2>
+				{{range .SideProjects}}
+				<div class="card">
+				<h4>
+					<a href="{{if eq .Link "javascript:void(0)"}}javascript:void(0){{else}}{{.Link}}{{end}}" 
+					onclick="{{if eq .Link "javascript:void(0)"}}
+								refreshCurrentPage(); 
+								return false; 
+								{{end}}">
+					{{.Title}}
+					</a>
+				</h4>
+				<p>{{.Description}}</p>
+				<p>- {{.Technologies}}</p>
+				</div>
+				{{end}}
+			</section>
 
-	router.ServeHTTP(w, r)
-}
+			<section>
+				<h2>Resume</h2>
+				<embed
+				src="../christian+mbaba_resume.pdf"
+				type="application/pdf"
+				width="100%"
+				height="550px"
+				/>
+				<p>
+				<a href="../christian+mbaba_resume.pdf" download
+					>Download Resume</a
+				>
+				</p>
+			</section>
 
-func ProfileHandler(c *gin.Context) {
-	// tmpl := template.Must(template.ParseFiles("../../templates/index.html"))
-	tmpl := template.Must(template.ParseFiles("/templates/index.html"))
+			<section>
+				<h2>App Links</h2>
+				{{range .WorkProjects}}
+				<div class="experience-mini">
+				<span>{{.Company}}</span>
+				{{ if ne .AppLink "" }}
+				<span>
+					-
+					<a href="{{ .AppLink }}" target="_blank">App on Play Store</a></span
+				>
+				{{ end }}
+				<span> - {{.Description}}</span>
+				</div>
+				<hr />
+				{{end}}
+			</section>
+
+			<section>
+				<h2>Book a Session</h2>
+				<iframe
+				src="{{.CalendlyURL}}"
+				width="100%"
+				height="900"
+				frameborder="0"
+				></iframe>
+			</section>
+			</div>
+		</body>
+		</html>
+
+	`)
 
 	data := PageData{
 		Name:          "Christian Mbaba",
@@ -129,12 +178,6 @@ func ProfileHandler(c *gin.Context) {
 		},
 		SideProjects: []SideProject{
 			{
-				Title:        "Portfolio",
-				Description:  "Developer portfolio page with contact info, projects & open source contributions. (LIVE)",
-				Technologies: "Microservices, Go, HTML, CSS, Docker, Nginx",
-				Link:         "https://github.com/chornge/portfolio",
-			},
-			{
 				Title:        "Audio Epistles",
 				Description:  "Grabs a video from any public YouTube playlist, extracts its audio, title, etc & publishes as a podcast. (LIVE)",
 				Technologies: "Rust, Node, FFmpeg, Cron, Spotify",
@@ -155,8 +198,8 @@ func ProfileHandler(c *gin.Context) {
 		},
 	}
 
-	c.Writer.Header().Set("Content-Type", "text/html; charset=utf-8")
-	tmpl.Execute(c.Writer, data)
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
+	tmpl.Execute(w, data)
 }
 
 type WorkProject struct {
@@ -178,22 +221,3 @@ type PageData struct {
 	SideProjects  []SideProject
 	CalendlyURL   string
 }
-
-// package handler
-
-// import (
-// 	"html/template"
-// 	"net/http"
-
-// 	"github.com/gin-gonic/gin"
-// )
-
-// func Handler(w http.ResponseWriter, r *http.Request) {
-// 	router := gin.Default()
-// 	router.Static("/static", "static")
-// 	router.GET("/", func(c *gin.Context) {
-// 		tmpl := template.Must(template.ParseFiles("templates/index.html"))
-// 		tmpl.Execute(c.Writer, nil)
-// 	})
-// 	router.ServeHTTP(w, r)
-// }
