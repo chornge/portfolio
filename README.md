@@ -2,7 +2,7 @@
 
 Welcome 🖖🏽 my name is Christian. I am an Android Developer.
 
-Actual portfolio located at https://portfolio-mauve-one-j7kh9fwul9.vercel.app/api
+Actual portfolio located at https://chornge.com/api
 
 ![](http://estruyf-github.azurewebsites.net/api/VisitorHit?user=chornge&repo=portfolio)
 
