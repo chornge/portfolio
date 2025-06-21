@@ -19,12 +19,12 @@ func TournupHandler(w http.ResponseWriter, r *http.Request) {
       font-family: sans-serif;
       background: #f9f9f9;
       margin: 0;
-      padding: 1rem 2rem 2rem 2rem; /* reduced top padding */
+      padding: 1rem 2rem 2rem 2rem;
     }
 
     h1 {
       text-align: center;
-      margin-bottom: 1rem; /* reduced space below title */
+      margin-bottom: 1rem;
       font-size: 2rem;
       color: #222;
     }
@@ -33,7 +33,7 @@ func TournupHandler(w http.ResponseWriter, r *http.Request) {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 2rem;
-      margin-bottom: 2.5rem; /* tighter spacing between rows */
+      margin-bottom: 2.5rem;
     }
 
     .bracket {
@@ -52,35 +52,9 @@ func TournupHandler(w http.ResponseWriter, r *http.Request) {
 
     iframe {
       width: 100%;
-      height: 550px;
+      height: 400px;
       border: none;
       border-radius: 6px;
-    }
-
-    .next-up {
-      margin-top: 0.5rem;
-      background: #e0f7fa;
-      padding: 0.5rem 1rem;
-      border-left: 5px solid #00bcd4;
-      font-weight: bold;
-      color: #004d40;
-      border-radius: 4px;
-    }
-
-    .status-table {
-      margin-top: 0.5rem;
-      font-size: 0.9rem;
-      line-height: 1.4;
-    }
-
-    .winner {
-      color: green;
-      font-weight: bold;
-    }
-
-    .loser {
-      color: red;
-      text-decoration: line-through;
     }
 
     @media (max-width: 768px) {
@@ -97,19 +71,10 @@ func TournupHandler(w http.ResponseWriter, r *http.Request) {
     <div class="bracket">
       <h2 id="pingpong-label">🏓 Ping-Pong (Bracket)</h2>
       <iframe id="pingpong" src="https://brackethq.com/b/ddqqc/embed/?zoom=0&name=1&stand=0&bracket=1"></iframe>
-      <div class="next-up">Next Up: James vs. Chris</div>
-      <div class="status-table">
-        <div><span class="winner">✅ Alice</span> defeated <span class="loser">❌ Bob</span></div>
-        <div><span class="winner">✅ Chris</span> defeated <span class="loser">❌ David</span></div>
-      </div>
     </div>
     <div class="bracket">
       <h2 id="basketball-label">🏀 Basketball (Bracket)</h2>
       <iframe id="basketball" src="https://brackethq.com/b/ndqqc/embed/?zoom=0&name=1&stand=0&bracket=1"></iframe>
-      <div class="next-up">Next Up: Team Red vs. Team Blue</div>
-      <div class="status-table">
-        <div><span class="winner">✅ Team Yellow</span> defeated <span class="loser">❌ Team Green</span></div>
-      </div>
     </div>
   </div>
 
@@ -117,18 +82,10 @@ func TournupHandler(w http.ResponseWriter, r *http.Request) {
     <div class="bracket">
       <h2 id="fifa-label">🎮 FIFA (Bracket)</h2>
       <iframe id="fifa" src="https://brackethq.com/b/jdqqc/embed/?zoom=0&name=1&stand=0&bracket=1"></iframe>
-      <div class="next-up">Next Up: Ronaldo vs. Messi</div>
-      <div class="status-table">
-        <div><span class="winner">✅ Neymar</span> defeated <span class="loser">❌ Mbappe</span></div>
-      </div>
     </div>
     <div class="bracket">
       <h2 id="mkx-label">🥋 Mortal Kombat X (Bracket)</h2>
       <iframe id="mkx" src="https://brackethq.com/b/ldqqc/embed/?zoom=0&name=1&stand=0&bracket=1"></iframe>
-      <div class="next-up">Next Up: Scorpion vs. Sub-Zero</div>
-      <div class="status-table">
-        <div><span class="winner">✅ Liu Kang</span> defeated <span class="loser">❌ Johnny Cage</span></div>
-      </div>
     </div>
   </div>
 
