@@ -13,7 +13,7 @@ func TournupHandler(w http.ResponseWriter, r *http.Request) {
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Tournup Brackets</title>
+  <title>🎮 FIFA - Live Bracket</title>
   <style>
     body {
       font-family: sans-serif;
@@ -29,14 +29,9 @@ func TournupHandler(w http.ResponseWriter, r *http.Request) {
       color: #222;
     }
 
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-      margin-bottom: 2.5rem;
-    }
-
     .bracket {
+      max-width: 1000px;
+      margin: 0 auto;
       background: white;
       padding: 1rem;
       border-radius: 8px;
@@ -45,7 +40,7 @@ func TournupHandler(w http.ResponseWriter, r *http.Request) {
 
     .bracket h2 {
       text-align: center;
-      font-size: 1.2rem;
+      font-size: 1.3rem;
       margin-bottom: 0.75rem;
       color: #333;
     }
@@ -56,65 +51,33 @@ func TournupHandler(w http.ResponseWriter, r *http.Request) {
       border: none;
       border-radius: 6px;
     }
-
-    @media (max-width: 768px) {
-      .grid {
-        grid-template-columns: 1fr;
-      }
-    }
   </style>
 </head>
 <body>
-  <h1>🏆 Tournup - Live Brackets</h1>
+  <h1>🎮 FIFA - Tournament</h1>
 
-  <div class="grid">
-    <div class="bracket">
-      <h2 id="pingpong-label">🏓 Ping-Pong (Bracket)</h2>
-      <iframe id="pingpong" src="https://brackethq.com/b/ddqqc/embed/?zoom=0&name=1&stand=0&bracket=1"></iframe>
-    </div>
-    <div class="bracket">
-      <h2 id="basketball-label">🏀 Basketball (Bracket)</h2>
-      <iframe id="basketball" src="https://brackethq.com/b/ndqqc/embed/?zoom=0&name=1&stand=0&bracket=1"></iframe>
-    </div>
-  </div>
-
-  <div class="grid">
-    <div class="bracket">
-      <h2 id="fifa-label">🎮 FIFA (Bracket)</h2>
-      <iframe id="fifa" src="https://brackethq.com/b/jdqqc/embed/?zoom=0&name=1&stand=0&bracket=1"></iframe>
-    </div>
-    <div class="bracket">
-      <h2 id="mkx-label">🥋 Mortal Kombat X (Bracket)</h2>
-      <iframe id="mkx" src="https://brackethq.com/b/ldqqc/embed/?zoom=0&name=1&stand=0&bracket=1"></iframe>
-    </div>
+  <div class="bracket">
+    <h2 id="fifa-label">🎮 FIFA (Bracket)</h2>
+    <iframe id="fifa" src="https://brackethq.com/b/jdqqc/embed/?zoom=0&name=1&stand=0&bracket=1"></iframe>
   </div>
 
   <script>
-    const refreshInterval = 20000;
+    const refreshInterval = 10000; // 10 seconds
     let showBracket = true;
 
-    const bracketMap = {
-      pingpong: { name: "🏓 Ping-Pong", src: "https://brackethq.com/b/ddqqc/embed/" },
-      basketball: { name: "🏀 Basketball", src: "https://brackethq.com/b/ndqqc/embed/" },
-      fifa: { name: "🎮 FIFA", src: "https://brackethq.com/b/jdqqc/embed/" },
-      mkx: { name: "🥋 Mortal Kombat X", src: "https://brackethq.com/b/ldqqc/embed/" }
-    };
+    const iframe = document.getElementById("fifa");
+    const label = document.getElementById("fifa-label");
+    const baseSrc = "https://brackethq.com/b/jdqqc/embed/";
 
-    function toggleBracketAndStandings() {
+    function toggleView() {
       showBracket = !showBracket;
       const stand = showBracket ? "0" : "1";
       const bracket = showBracket ? "1" : "0";
-
-      Object.entries(bracketMap).forEach(([id, data]) => {
-        const iframe = document.getElementById(id);
-        const label = document.getElementById(id + "-label");
-        const newSrc = data.src + "?zoom=0&name=1&stand=" + stand + "&bracket=" + bracket + "&_=" + Date.now();
-        iframe.src = newSrc;
-        label.textContent = data.name + " (" + (showBracket ? "Bracket" : "Standings") + ")";
-      });
+      iframe.src = baseSrc + "?zoom=0&name=1&stand=" + stand + "&bracket=" + bracket + "&_=" + Date.now();
+      label.textContent = "🎮 FIFA (" + (showBracket ? "Bracket" : "Standings") + ")";
     }
 
-    setInterval(toggleBracketAndStandings, refreshInterval);
+    setInterval(toggleView, refreshInterval);
   </script>
 </body>
 </html>
