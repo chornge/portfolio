@@ -90,7 +90,7 @@ func TournupHandler(w http.ResponseWriter, r *http.Request) {
   </div>
 
   <script>
-    const refreshInterval = 10000;
+    const refreshInterval = 20000;
     let showBracket = true;
 
     const bracketMap = {
