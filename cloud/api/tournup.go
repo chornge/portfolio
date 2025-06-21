@@ -50,17 +50,11 @@ func TournupHandler(w http.ResponseWriter, r *http.Request) {
 			color: #333;
 			}
 
-			.solo {
-			max-width: 900px;
-			margin: 0 auto 4rem auto;
-			}
-
 			iframe {
 			width: 100%;
 			height: 550px;
 			border: none;
 			border-radius: 6px;
-			transition: opacity 0.3s ease;
 			}
 
 			@media (max-width: 768px) {
@@ -89,15 +83,14 @@ func TournupHandler(w http.ResponseWriter, r *http.Request) {
 			<h2 id="fifa-label">🎮 FIFA (Bracket)</h2>
 			<iframe id="fifa" src="https://brackethq.com/b/jdqqc/embed/?zoom=0&name=1&stand=0&bracket=1"></iframe>
 			</div>
-		</div>
-
-		<div class="bracket solo">
+			<div class="bracket">
 			<h2 id="mkx-label">🥋 Mortal Kombat X (Bracket)</h2>
 			<iframe id="mkx" src="https://brackethq.com/b/ldqqc/embed/?zoom=0&name=1&stand=0&bracket=1"></iframe>
+			</div>
 		</div>
 
 		<script>
-			const refreshInterval = 10000; // 10 seconds
+			const refreshInterval = 10000;
 			let showBracket = true;
 
 			const bracketMap = {
@@ -115,13 +108,9 @@ func TournupHandler(w http.ResponseWriter, r *http.Request) {
 			Object.entries(bracketMap).forEach(([id, data]) => {
 				const iframe = document.getElementById(id);
 				const label = document.getElementById(id + "-label");
-
 				const newSrc = data.src + "?zoom=0&name=1&stand=" + stand + "&bracket=" + bracket + "&_=" + Date.now();
-
-				setTimeout(() => {
 				iframe.src = newSrc;
-				label.textContent = data.name + " (" + (showBracket ? "Bracket" : "Standings") + ")";s
-				}, 200);
+				label.textContent = data.name + " (" + (showBracket ? "Bracket" : "Standings") + ")";
 			});
 			}
 
