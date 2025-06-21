@@ -5,7 +5,7 @@ import (
 	"net/http"
 )
 
-func TournupHandler(w http.ResponseWriter, r *http.Request) {
+func Tournup(w http.ResponseWriter, r *http.Request) {
 	tmpl := template.New("tournup")
 
 	tmpl.Parse(`
