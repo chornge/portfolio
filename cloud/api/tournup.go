@@ -86,12 +86,8 @@ func TournupHandler(w http.ResponseWriter, r *http.Request) {
 
 		<div class="grid">
 			<div class="bracket">
-			<h2 id="fifa1-label">🎮 FIFA - Console 1 (Bracket)</h2>
-			<iframe id="fifa1" src="https://brackethq.com/b/jdqqc/embed/?zoom=0&name=1&stand=0&bracket=1"></iframe>
-			</div>
-			<div class="bracket">
-			<h2 id="fifa2-label">🎮 FIFA - Console 2 (Bracket)</h2>
-			<iframe id="fifa2" src="https://brackethq.com/b/rdqqc/embed/?zoom=0&name=1&stand=0&bracket=1"></iframe>
+			<h2 id="fifa-label">🎮 FIFA (Bracket)</h2>
+			<iframe id="fifa" src="https://brackethq.com/b/jdqqc/embed/?zoom=0&name=1&stand=0&bracket=1"></iframe>
 			</div>
 		</div>
 
@@ -107,8 +103,7 @@ func TournupHandler(w http.ResponseWriter, r *http.Request) {
 			const bracketMap = {
 			pingpong: { name: "🏓 Ping-Pong", src: "https://brackethq.com/b/ddqqc/embed/" },
 			basketball: { name: "🏀 Basketball", src: "https://brackethq.com/b/ndqqc/embed/" },
-			fifa1: { name: "🎮 FIFA - Console 1", src: "https://brackethq.com/b/jdqqc/embed/" },
-			fifa2: { name: "🎮 FIFA - Console 2", src: "https://brackethq.com/b/rdqqc/embed/" },
+			fifa: { name: "🎮 FIFA", src: "https://brackethq.com/b/jdqqc/embed/" },
 			mkx: { name: "🥋 Mortal Kombat X", src: "https://brackethq.com/b/ldqqc/embed/" }
 			};
 
