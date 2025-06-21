@@ -9,115 +9,158 @@ func TournupHandler(w http.ResponseWriter, r *http.Request) {
 	tmpl := template.New("tournup")
 
 	tmpl.Parse(`
-		<!DOCTYPE html>
-		<html lang="en">
-		<head>
-		<meta charset="UTF-8" />
-		<title>Tournup Brackets</title>
-		<style>
-			body {
-			font-family: sans-serif;
-			background: #f9f9f9;
-			margin: 0;
-			padding: 2rem;
-			}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Tournup Brackets</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #f9f9f9;
+      margin: 0;
+      padding: 1rem 2rem 2rem 2rem; /* reduced top padding */
+    }
 
-			h1 {
-			text-align: center;
-			margin-bottom: 2rem;
-			font-size: 2rem;
-			color: #222;
-			}
+    h1 {
+      text-align: center;
+      margin-bottom: 1rem; /* reduced space below title */
+      font-size: 2rem;
+      color: #222;
+    }
 
-			.grid {
-			display: grid;
-			grid-template-columns: 1fr 1fr;
-			gap: 3rem;
-			margin-bottom: 4rem;
-			}
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-bottom: 2.5rem; /* tighter spacing between rows */
+    }
 
-			.bracket {
-			background: white;
-			padding: 1rem;
-			border-radius: 8px;
-			box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-			}
+    .bracket {
+      background: white;
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    }
 
-			.bracket h2 {
-			text-align: center;
-			font-size: 1.2rem;
-			margin-bottom: 1rem;
-			color: #333;
-			}
+    .bracket h2 {
+      text-align: center;
+      font-size: 1.2rem;
+      margin-bottom: 0.75rem;
+      color: #333;
+    }
 
-			iframe {
-			width: 100%;
-			height: 550px;
-			border: none;
-			border-radius: 6px;
-			}
+    iframe {
+      width: 100%;
+      height: 550px;
+      border: none;
+      border-radius: 6px;
+    }
 
-			@media (max-width: 768px) {
-			.grid {
-				grid-template-columns: 1fr;
-			}
-			}
-		</style>
-		</head>
-		<body>
-		<h1>🏆 Tournup - Live Brackets</h1>
+    .next-up {
+      margin-top: 0.5rem;
+      background: #e0f7fa;
+      padding: 0.5rem 1rem;
+      border-left: 5px solid #00bcd4;
+      font-weight: bold;
+      color: #004d40;
+      border-radius: 4px;
+    }
 
-		<div class="grid">
-			<div class="bracket">
-			<h2 id="pingpong-label">🏓 Ping-Pong (Bracket)</h2>
-			<iframe id="pingpong" src="https://brackethq.com/b/ddqqc/embed/?zoom=0&name=1&stand=0&bracket=1"></iframe>
-			</div>
-			<div class="bracket">
-			<h2 id="basketball-label">🏀 Basketball (Bracket)</h2>
-			<iframe id="basketball" src="https://brackethq.com/b/ndqqc/embed/?zoom=0&name=1&stand=0&bracket=1"></iframe>
-			</div>
-		</div>
+    .status-table {
+      margin-top: 0.5rem;
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
 
-		<div class="grid">
-			<div class="bracket">
-			<h2 id="fifa-label">🎮 FIFA (Bracket)</h2>
-			<iframe id="fifa" src="https://brackethq.com/b/jdqqc/embed/?zoom=0&name=1&stand=0&bracket=1"></iframe>
-			</div>
-			<div class="bracket">
-			<h2 id="mkx-label">🥋 Mortal Kombat X (Bracket)</h2>
-			<iframe id="mkx" src="https://brackethq.com/b/ldqqc/embed/?zoom=0&name=1&stand=0&bracket=1"></iframe>
-			</div>
-		</div>
+    .winner {
+      color: green;
+      font-weight: bold;
+    }
 
-		<script>
-			const refreshInterval = 10000;
-			let showBracket = true;
+    .loser {
+      color: red;
+      text-decoration: line-through;
+    }
 
-			const bracketMap = {
-			pingpong: { name: "🏓 Ping-Pong", src: "https://brackethq.com/b/ddqqc/embed/" },
-			basketball: { name: "🏀 Basketball", src: "https://brackethq.com/b/ndqqc/embed/" },
-			fifa: { name: "🎮 FIFA", src: "https://brackethq.com/b/jdqqc/embed/" },
-			mkx: { name: "🥋 Mortal Kombat X", src: "https://brackethq.com/b/ldqqc/embed/" }
-			};
+    @media (max-width: 768px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>🏆 Tournup - Live Brackets</h1>
 
-			function toggleBracketAndStandings() {
-			showBracket = !showBracket;
-			const stand = showBracket ? "0" : "1";
-			const bracket = showBracket ? "1" : "0";
+  <div class="grid">
+    <div class="bracket">
+      <h2 id="pingpong-label">🏓 Ping-Pong (Bracket)</h2>
+      <iframe id="pingpong" src="https://brackethq.com/b/ddqqc/embed/?zoom=0&name=1&stand=0&bracket=1"></iframe>
+      <div class="next-up">Next Up: James vs. Chris</div>
+      <div class="status-table">
+        <div><span class="winner">✅ Alice</span> defeated <span class="loser">❌ Bob</span></div>
+        <div><span class="winner">✅ Chris</span> defeated <span class="loser">❌ David</span></div>
+      </div>
+    </div>
+    <div class="bracket">
+      <h2 id="basketball-label">🏀 Basketball (Bracket)</h2>
+      <iframe id="basketball" src="https://brackethq.com/b/ndqqc/embed/?zoom=0&name=1&stand=0&bracket=1"></iframe>
+      <div class="next-up">Next Up: Team Red vs. Team Blue</div>
+      <div class="status-table">
+        <div><span class="winner">✅ Team Yellow</span> defeated <span class="loser">❌ Team Green</span></div>
+      </div>
+    </div>
+  </div>
 
-			Object.entries(bracketMap).forEach(([id, data]) => {
-				const iframe = document.getElementById(id);
-				const label = document.getElementById(id + "-label");
-				const newSrc = data.src + "?zoom=0&name=1&stand=" + stand + "&bracket=" + bracket + "&_=" + Date.now();
-				iframe.src = newSrc;
-				label.textContent = data.name + " (" + (showBracket ? "Bracket" : "Standings") + ")";
-			});
-			}
+  <div class="grid">
+    <div class="bracket">
+      <h2 id="fifa-label">🎮 FIFA (Bracket)</h2>
+      <iframe id="fifa" src="https://brackethq.com/b/jdqqc/embed/?zoom=0&name=1&stand=0&bracket=1"></iframe>
+      <div class="next-up">Next Up: Ronaldo vs. Messi</div>
+      <div class="status-table">
+        <div><span class="winner">✅ Neymar</span> defeated <span class="loser">❌ Mbappe</span></div>
+      </div>
+    </div>
+    <div class="bracket">
+      <h2 id="mkx-label">🥋 Mortal Kombat X (Bracket)</h2>
+      <iframe id="mkx" src="https://brackethq.com/b/ldqqc/embed/?zoom=0&name=1&stand=0&bracket=1"></iframe>
+      <div class="next-up">Next Up: Scorpion vs. Sub-Zero</div>
+      <div class="status-table">
+        <div><span class="winner">✅ Liu Kang</span> defeated <span class="loser">❌ Johnny Cage</span></div>
+      </div>
+    </div>
+  </div>
 
-			setInterval(toggleBracketAndStandings, refreshInterval);
-		</script>
-		</body>
-		</html>
+  <script>
+    const refreshInterval = 10000;
+    let showBracket = true;
+
+    const bracketMap = {
+      pingpong: { name: "🏓 Ping-Pong", src: "https://brackethq.com/b/ddqqc/embed/" },
+      basketball: { name: "🏀 Basketball", src: "https://brackethq.com/b/ndqqc/embed/" },
+      fifa: { name: "🎮 FIFA", src: "https://brackethq.com/b/jdqqc/embed/" },
+      mkx: { name: "🥋 Mortal Kombat X", src: "https://brackethq.com/b/ldqqc/embed/" }
+    };
+
+    function toggleBracketAndStandings() {
+      showBracket = !showBracket;
+      const stand = showBracket ? "0" : "1";
+      const bracket = showBracket ? "1" : "0";
+
+      Object.entries(bracketMap).forEach(([id, data]) => {
+        const iframe = document.getElementById(id);
+        const label = document.getElementById(id + "-label");
+        const newSrc = data.src + "?zoom=0&name=1&stand=" + stand + "&bracket=" + bracket + "&_=" + Date.now();
+        iframe.src = newSrc;
+        label.textContent = data.name + " (" + (showBracket ? "Bracket" : "Standings") + ")";
+      });
+    }
+
+    setInterval(toggleBracketAndStandings, refreshInterval);
+  </script>
+</body>
+</html>
 `)
 
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
