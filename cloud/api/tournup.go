@@ -5,7 +5,7 @@ import (
 	"net/http"
 )
 
-func Tournup(w http.ResponseWriter, r *http.Request) {
+func TournupHandler(w http.ResponseWriter, r *http.Request) {
 	tmpl := template.New("tournup")
 
 	tmpl.Parse(`
@@ -33,7 +33,7 @@ func Tournup(w http.ResponseWriter, r *http.Request) {
 					box-shadow: 0 4px 20px rgba(0,0,0,0.1);
 				}
 			</style>
-			<meta http-equiv="refresh" content="10" />
+			<meta http-equiv="refresh" content="60" />
 		</head>
 		<body>
 			<h1 style="text-align: center;">🏆 Tournup - Live Brackets</h1>
