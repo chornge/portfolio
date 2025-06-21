@@ -52,8 +52,7 @@ func TournupHandler(w http.ResponseWriter, r *http.Request) {
 
 			.solo {
 			max-width: 900px;
-			margin: 0 auto;
-			margin-bottom: 4rem;
+			margin: 0 auto 4rem auto;
 			}
 
 			iframe {
@@ -72,57 +71,72 @@ func TournupHandler(w http.ResponseWriter, r *http.Request) {
 		</style>
 		</head>
 		<body>
-			<h1>🏆 Tournup - Live Brackets</h1>
+		<h1>🏆 Tournup - Live Brackets</h1>
 
-			<div class="grid">
-				<div class="bracket">
-				<h2>🏓 Ping-Pong</h2>
-				<iframe id="pingpong" src="https://brackethq.com/b/ddqqc/embed/?zoom=0&name=1&stand=1"></iframe>
-				</div>
-				<div class="bracket">
-				<h2>🏀 Basketball</h2>
-				<iframe id="basketball" src="https://brackethq.com/b/ndqqc/embed/?zoom=0&name=1&stand=1"></iframe>
-				</div>
+		<div class="grid">
+			<div class="bracket">
+			<h2 id="pingpong-label">🏓 Ping-Pong (Bracket)</h2>
+			<iframe id="pingpong" src="https://brackethq.com/b/ddqqc/embed/?zoom=0&name=1&stand=0&bracket=1"></iframe>
 			</div>
-
-			<div class="grid">
-				<div class="bracket">
-				<h2>🎮 FIFA - Console 1</h2>
-				<iframe id="fifa1" src="https://brackethq.com/b/jdqqc/embed/?zoom=0&name=1&stand=1"></iframe>
-				</div>
-				<div class="bracket">
-				<h2>🎮 FIFA - Console 2</h2>
-				<iframe id="fifa2" src="https://brackethq.com/b/rdqqc/embed/?zoom=0&name=1&stand=1"></iframe>
-				</div>
+			<div class="bracket">
+			<h2 id="basketball-label">🏀 Basketball (Bracket)</h2>
+			<iframe id="basketball" src="https://brackethq.com/b/ndqqc/embed/?zoom=0&name=1&stand=0&bracket=1"></iframe>
 			</div>
+		</div>
 
-			<div class="bracket solo">
-				<h2>🥋 Mortal Kombat X</h2>
-				<iframe id="mkx" src="https://brackethq.com/b/ldqqc/embed/?zoom=0&name=1&stand=1"></iframe>
+		<div class="grid">
+			<div class="bracket">
+			<h2 id="fifa1-label">🎮 FIFA - Console 1 (Bracket)</h2>
+			<iframe id="fifa1" src="https://brackethq.com/b/jdqqc/embed/?zoom=0&name=1&stand=0&bracket=1"></iframe>
 			</div>
+			<div class="bracket">
+			<h2 id="fifa2-label">🎮 FIFA - Console 2 (Bracket)</h2>
+			<iframe id="fifa2" src="https://brackethq.com/b/rdqqc/embed/?zoom=0&name=1&stand=0&bracket=1"></iframe>
+			</div>
+		</div>
 
-			<script>
-				const refreshInterval = 10000; // 10 seconds
+		<div class="bracket solo">
+			<h2 id="mkx-label">🥋 Mortal Kombat X (Bracket)</h2>
+			<iframe id="mkx" src="https://brackethq.com/b/ldqqc/embed/?zoom=0&name=1&stand=0&bracket=1"></iframe>
+		</div>
 
-				function refreshIframe(id) {
+		<script>
+			const refreshInterval = 10000; // 10 seconds
+			let showBracket = true;
+
+			const bracketMap = {
+			pingpong: { name: "🏓 Ping-Pong", src: "https://brackethq.com/b/ddqqc/embed/" },
+			basketball: { name: "🏀 Basketball", src: "https://brackethq.com/b/ndqqc/embed/" },
+			fifa1: { name: "🎮 FIFA - Console 1", src: "https://brackethq.com/b/jdqqc/embed/" },
+			fifa2: { name: "🎮 FIFA - Console 2", src: "https://brackethq.com/b/rdqqc/embed/" },
+			mkx: { name: "🥋 Mortal Kombat X", src: "https://brackethq.com/b/ldqqc/embed/" }
+			};
+
+			function toggleBracketAndStandings() {
+			showBracket = !showBracket;
+			const stand = showBracket ? "0" : "1";
+			const bracket = showBracket ? "1" : "0";
+
+			Object.entries(bracketMap).forEach(([id, data]) => {
 				const iframe = document.getElementById(id);
-				const src = iframe.src;
+				const label = document.getElementById(id + "-label");
+
 				iframe.style.opacity = 0.3;
+				const newSrc = data.src + "?zoom=0&name=1&stand=" + stand + "&bracket=" + bracket + "&_=" + Date.now();
+
 				setTimeout(() => {
-					iframe.src = src.split('?')[0] + '?_=' + new Date().getTime();
-					iframe.style.opacity = 1;
+				iframe.src = newSrc;
+				label.textContent = data.name + " (" + (showBracket ? "Bracket" : "Standings") + ")";s
+				iframe.style.opacity = 1;
 				}, 200);
-				}
+			});
+			}
 
-				const ids = ['pingpong', 'basketball', 'fifa1', 'fifa2', 'mkx'];
-
-				setInterval(() => {
-				ids.forEach(id => refreshIframe(id));
-				}, refreshInterval);
-			</script>
+			setInterval(toggleBracketAndStandings, refreshInterval);
+		</script>
 		</body>
 		</html>
-	`)
+`)
 
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	tmpl.Execute(w, nil)
