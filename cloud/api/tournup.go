@@ -121,13 +121,11 @@ func TournupHandler(w http.ResponseWriter, r *http.Request) {
 				const iframe = document.getElementById(id);
 				const label = document.getElementById(id + "-label");
 
-				iframe.style.opacity = 0.3;
 				const newSrc = data.src + "?zoom=0&name=1&stand=" + stand + "&bracket=" + bracket + "&_=" + Date.now();
 
 				setTimeout(() => {
 				iframe.src = newSrc;
 				label.textContent = data.name + " (" + (showBracket ? "Bracket" : "Standings") + ")";s
-				iframe.style.opacity = 1;
 				}, 200);
 			});
 			}
