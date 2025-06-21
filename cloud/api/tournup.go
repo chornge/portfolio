@@ -47,7 +47,7 @@ func TournupHandler(w http.ResponseWriter, r *http.Request) {
 
     iframe {
       width: 100%;
-      height: 400px;
+      height: 1000px;
       border: none;
       border-radius: 6px;
     }
