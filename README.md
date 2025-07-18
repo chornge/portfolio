@@ -13,9 +13,9 @@ Actual portfolio located at https://chornge.com/api
 
 ### Open Source Analytics ⚙️
 
-![Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=chornge&layout=compact&count_private=true)
+![Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=chornge&layout=compact&hide=javascript)
 
-![Statistics](https://github-readme-stats.vercel.app/api/?username=chornge&count_private=true&show_icons=true)
+![Statistics](https://github-readme-stats.vercel.app/api/?username=chornge&show_icons=true&include_all_commits=true&rank_icon=default&hide_title=true)
 
 ### Let's connect!
 
