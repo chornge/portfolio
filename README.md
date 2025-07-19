@@ -15,7 +15,7 @@ Actual portfolio located at https://chornge.com/api
 
 ![Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=chornge&layout=compact&hide=javascript)
 
-![Statistics](https://github-readme-stats.vercel.app/api/?username=chornge&show_icons=true&include_all_commits=true&rank_icon=default&hide_title=true)
+![Statistics](https://github-readme-stats-sigma-five.vercel.app/api?username=chornge&show_icons=true&include_all_commits=true&hide_title=true)
 
 ### Let's connect!
 
