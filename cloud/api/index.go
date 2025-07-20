@@ -5,102 +5,105 @@ import (
 	"net/http"
 )
 
+const templateString = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Portfolio - {{.Name}}</title>
+	<link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+	<script data-goatcounter="https://chornge.goatcounter.com/count"
+		async src="//gc.zgo.at/count.js"></script>
+	<div class="container">
+	<header>
+		<h2>{{.Name}}</h2>
+		<h4>I create excellent tools that provide solutions</h4>
+		<p>
+		<a href="mailto:{{.Email}}">{{.Email}}</a> |
+		<a href="{{.LinkedIn}}">LinkedIn</a> |
+		<a href="{{.Github}}">GitHub</a> |
+		<a href="{{.StackOverflow}}">StackOverflow</a>
+		</p>
+	</header>
+
+	<section>
+		<h2>Education</h2>
+		<p>{{.Education}}</p>
+	</section>
+
+	<section>
+		<h2>Side Projects</h2>
+		{{range .SideProjects}}
+		<div class="card">
+		<h4>
+			<a href="{{if eq .Link "javascript:void(0)"}}javascript:void(0){{else}}{{.Link}}{{end}}" 
+			onclick="{{if eq .Link "javascript:void(0)"}}
+						refreshCurrentPage(); 
+						return false; 
+						{{end}}">
+			{{.Title}}
+			</a>
+		</h4>
+		<p>{{.Description}}</p>
+		<p>- {{.Technologies}}</p>
+		</div>
+		{{end}}
+	</section>
+
+	<section>
+		<h2>Resume</h2>
+		<embed
+		src="../christian+mbaba_resume.pdf"
+		type="application/pdf"
+		width="100%"
+		height="550px"
+		/>
+		<p>
+		<a href="../christian+mbaba_resume.pdf" download
+			>Download Resume</a
+		>
+		</p>
+	</section>
+
+	<section>
+		<h2>App Links</h2>
+		{{range .WorkProjects}}
+		<div class="experience-mini">
+		<span>{{.Company}}</span>
+		{{ if ne .AppLink "" }}
+		<span>
+			-
+			<a href="{{ .AppLink }}" target="_blank">App on Play Store</a></span
+		>
+		{{ end }}
+		<span> - {{.Description}}</span>
+		</div>
+		<hr />
+		{{end}}
+	</section>
+
+	<section>
+		<h2>Book a Session</h2>
+		<iframe
+		src="{{.CalendlyURL}}"
+		width="100%"
+		height="900"
+		frameborder="0"
+		></iframe>
+	</section>
+	</div>
+</body>
+</html>
+`
+
 func Handler(w http.ResponseWriter, r *http.Request) {
-	tmpl := template.New("profile")
-
-	tmpl.Parse(`
-		<!DOCTYPE html>
-		<html lang="en">
-		<head>
-			<meta charset="UTF-8" />
-			<title>Portfolio - {{.Name}}</title>
-			<link rel="stylesheet" href="../style.css" />
-		</head>
-		<body>
-			<script data-goatcounter="https://chornge.goatcounter.com/count"
-				async src="//gc.zgo.at/count.js"></script>
-			<div class="container">
-			<header>
-				<h2>{{.Name}}</h2>
-				<h4>I create excellent tools that provide solutions</h4>
-				<p>
-				<a href="mailto:{{.Email}}">{{.Email}}</a> |
-				<a href="{{.LinkedIn}}">LinkedIn</a> |
-				<a href="{{.Github}}">GitHub</a> |
-				<a href="{{.StackOverflow}}">StackOverflow</a>
-				</p>
-			</header>
-
-			<section>
-				<h2>Education</h2>
-				<p>{{.Education}}</p>
-			</section>
-
-			<section>
-				<h2>Side Projects</h2>
-				{{range .SideProjects}}
-				<div class="card">
-				<h4>
-					<a href="{{if eq .Link "javascript:void(0)"}}javascript:void(0){{else}}{{.Link}}{{end}}" 
-					onclick="{{if eq .Link "javascript:void(0)"}}
-								refreshCurrentPage(); 
-								return false; 
-								{{end}}">
-					{{.Title}}
-					</a>
-				</h4>
-				<p>{{.Description}}</p>
-				<p>- {{.Technologies}}</p>
-				</div>
-				{{end}}
-			</section>
-
-			<section>
-				<h2>Resume</h2>
-				<embed
-				src="../christian+mbaba_resume.pdf"
-				type="application/pdf"
-				width="100%"
-				height="550px"
-				/>
-				<p>
-				<a href="../christian+mbaba_resume.pdf" download
-					>Download Resume</a
-				>
-				</p>
-			</section>
-
-			<section>
-				<h2>App Links</h2>
-				{{range .WorkProjects}}
-				<div class="experience-mini">
-				<span>{{.Company}}</span>
-				{{ if ne .AppLink "" }}
-				<span>
-					-
-					<a href="{{ .AppLink }}" target="_blank">App on Play Store</a></span
-				>
-				{{ end }}
-				<span> - {{.Description}}</span>
-				</div>
-				<hr />
-				{{end}}
-			</section>
-
-			<section>
-				<h2>Book a Session</h2>
-				<iframe
-				src="{{.CalendlyURL}}"
-				width="100%"
-				height="900"
-				frameborder="0"
-				></iframe>
-			</section>
-			</div>
-		</body>
-		</html>
-
-	`)
+	tmpl, err := template.New("profile").Parse(templateString)
+	if err != nil {
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		return
+	}
 
 	data := PageData{
 		Name:          "Christian Mbaba",
@@ -199,7 +202,9 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
-	tmpl.Execute(w, data)
+	if err := tmpl.Execute(w, data); err != nil {
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+	}
 }
 
 type WorkProject struct {
