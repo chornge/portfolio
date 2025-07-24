@@ -2,7 +2,7 @@
 
 Welcome 🖖🏽 my name is Christian. I am an Android Developer.
 
-Actual portfolio located at https://chornge.com/api
+You can find my porfolio at https://chornge.com/api
 
 ![](http://estruyf-github.azurewebsites.net/api/VisitorHit?user=chornge&repo=portfolio)
 
@@ -15,7 +15,7 @@ Actual portfolio located at https://chornge.com/api
 
 ![Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=chornge&layout=compact&hide=javascript&theme=dark)
 
-![Statistics](https://github-readme-stats-sigma-five.vercel.app/api?username=chornge&show_icons=true&include_all_commits=true&hide_title=true&count_private=true&hide=contribs&theme=dark)
+![Statistics](https://github-readme-stats.vercel.app/api?username=chornge&show_icons=true&include_all_commits=false&hide_title=true&count_private=true&theme=dark)
 
 ### Let's connect!
 
