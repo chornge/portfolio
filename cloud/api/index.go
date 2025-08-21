@@ -19,7 +19,7 @@ const templateString = `
 	<div class="container">
 	<header>
 		<h2>{{.Name}}</h2>
-		<h4>I create excellent tools that provide solutions</h4>
+		<h4>I create excellent tools to help, inspire, and improve the world around me</h4>
 		<p>
 		<a href="mailto:{{.Email}}">{{.Email}}</a> |
 		<a href="{{.LinkedIn}}">LinkedIn</a> |
