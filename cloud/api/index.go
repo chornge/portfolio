@@ -181,22 +181,22 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 		},
 		SideProjects: []SideProject{
 			{
-				Title:        "Audio Epistles",
-				Description:  "Grabs a video from any public YouTube playlist, extracts its audio, title, etc & publishes as a podcast. (In Prod)",
-				Technologies: "Rust, Node, FFmpeg, Cron, Spotify",
-				Link:         "https://github.com/chornge/audio-epistles",
-			},
-			{
-				Title:        "Drone-VAR (SkyJudge)",
-				Description:  "A user with \"any\" video drone can detect offsides occurring in realtime during a soccer match. (Coming Soon)",
-				Technologies: "Rust, MavLink, Candle, ONNX",
-				Link:         "https://github.com/chornge/sky-judge",
+				Title:        "Easy-Sermon",
+				Description:  "Listens for a Bible reference - john three verse sixteen - then broadcasts `John 3:16` to ProPresenter. (In Prod)",
+				Technologies: "Python, Rust, Vosk, ProPresenter",
+				Link:         "https://github.com/chornge/easy_sermon",
 			},
 			{
 				Title:        "Wish and Swish",
 				Description:  "Makes waste disposals hands-free by automatically opening a trash can when the word \"KOBE\" is spoken. (Ongoing)",
 				Technologies: "Rust, Raspberry Pi, FFmpeg, Rustpotter-cli, rppal",
 				Link:         "https://github.com/chornge/wish_and_swish",
+			},
+			{
+				Title:        "Drone-VAR (SkyJudge)",
+				Description:  "A user with \"any\" video drone can detect offsides occurring in realtime during a soccer match. (Coming Soon)",
+				Technologies: "Rust, MavLink, Candle, ONNX",
+				Link:         "https://github.com/chornge/sky-judge",
 			},
 		},
 	}
