@@ -183,7 +183,7 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 			{
 				Title:        "Easy-Sermon",
 				Description:  "Listens for a Bible reference - john three verse sixteen - then broadcasts `John 3:16` to ProPresenter. (In Prod)",
-				Technologies: "Python, Rust, Vosk, ProPresenter",
+				Technologies: "Rust, Python, Vosk, ProPresenter",
 				Link:         "https://github.com/chornge/easy_sermon",
 			},
 			{
