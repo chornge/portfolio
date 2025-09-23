@@ -187,6 +187,12 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 				Link:         "https://github.com/chornge/easy_sermon",
 			},
 			{
+				Title:        "Kmpli",
+				Description:  "Generate Kotlin/Compose Multiplatform projects w/ custom configurations & tests from the command-line. (In Prod)",
+				Technologies: "Kotlin, Compose Multiplatform, Java 17, Gradle, GitHub Actions",
+				Link:         "https://github.com/chornge/kmpli",
+			},
+			{
 				Title:        "Wish and Swish",
 				Description:  "Makes waste disposals hands-free by automatically opening a trash can when the word \"KOBE\" is spoken. (Ongoing)",
 				Technologies: "Rust, Raspberry Pi, FFmpeg, Rustpotter-cli, rppal",
