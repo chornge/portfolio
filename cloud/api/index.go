@@ -183,8 +183,14 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 			{
 				Title:        "Easy-Sermon",
 				Description:  "Listens for a Bible reference - john three verse sixteen - then broadcasts `John 3:16` to ProPresenter. (In Prod)",
-				Technologies: "Python, Rust, Vosk, ProPresenter",
+				Technologies: "Rust, Python, Vosk, ProPresenter",
 				Link:         "https://github.com/chornge/easy_sermon",
+			},
+			{
+				Title:        "Kmpli",
+				Description:  "Generate Kotlin/Compose Multiplatform projects w/ custom configurations & tests from the command-line. (In Prod)",
+				Technologies: "Kotlin, Compose Multiplatform, Java 17, Gradle, GitHub Actions",
+				Link:         "https://github.com/chornge/kmpli",
 			},
 			{
 				Title:        "Wish and Swish",
