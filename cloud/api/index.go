@@ -181,28 +181,34 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 		},
 		SideProjects: []SideProject{
 			{
+				Title:        "Drone-VAR (SkyJudge)",
+				Description:  "A user with \"any\" video drone can detect offsides occurring in realtime during a soccer match. (Coming Soon)",
+				Technologies: "Rust, MavLink, Candle, ONNX",
+				Link:         "https://github.com/chornge/sky-judge",
+			},
+			{
+				Title:        "Kmpli",
+				Description:  "Generate Kotlin/Compose Multiplatform projects with custom configurations & tests from the command-line. (In Prod)",
+				Technologies: "Kotlin, Compose Multiplatform, Java 17, Gradle, GitHub Actions",
+				Link:         "https://github.com/chornge/kmpli",
+			},
+			{
 				Title:        "Easy-Sermon",
-				Description:  "Listens for a Bible reference - john three verse sixteen - then broadcasts `John 3:16` to ProPresenter. (In Prod)",
+				Description:  "Listens for Bible references (John three verse sixteen) then broadcasts `John 3:16 - For God so loved...`. (In Prod)",
 				Technologies: "Rust, Python, Vosk, ProPresenter",
 				Link:         "https://github.com/chornge/easy_sermon",
 			},
 			{
-				Title:        "Kmpli",
-				Description:  "Generate Kotlin/Compose Multiplatform projects w/ custom configurations & tests from the command-line. (In Prod)",
-				Technologies: "Kotlin, Compose Multiplatform, Java 17, Gradle, GitHub Actions",
-				Link:         "https://github.com/chornge/kmpli",
+				Title:        "Audio-Epistles",
+				Description:  "Automatically publish new episodes of Spotify podcasts from the latest video in a YouTube playlist. (In Prod)",
+				Technologies: "Rust, Spotify, yt-dlp, chromedriver, FFmpeg, SQLite",
+				Link:         "https://github.com/chornge/audio-epistles",
 			},
 			{
 				Title:        "Wish and Swish",
 				Description:  "Makes waste disposals hands-free by automatically opening a trash can when the word \"KOBE\" is spoken. (Ongoing)",
 				Technologies: "Rust, Raspberry Pi, FFmpeg, Rustpotter-cli, rppal",
 				Link:         "https://github.com/chornge/wish_and_swish",
-			},
-			{
-				Title:        "Drone-VAR (SkyJudge)",
-				Description:  "A user with \"any\" video drone can detect offsides occurring in realtime during a soccer match. (Coming Soon)",
-				Technologies: "Rust, MavLink, Candle, ONNX",
-				Link:         "https://github.com/chornge/sky-judge",
 			},
 		},
 	}
