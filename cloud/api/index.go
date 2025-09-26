@@ -189,7 +189,7 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 			{
 				Title:        "Kmpli",
 				Description:  "Generate Kotlin/Compose Multiplatform projects with custom configurations & tests from the command-line. (In Prod)",
-				Technologies: "Kotlin, Compose Multiplatform, Java 17, Gradle, GitHub Actions",
+				Technologies: "Kotlin, Compose Multiplatform, Gradle, Ktor, Amper, GitHub Actions",
 				Link:         "https://github.com/chornge/kmpli",
 			},
 			{
