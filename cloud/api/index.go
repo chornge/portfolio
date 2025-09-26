@@ -206,7 +206,7 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 			},
 			{
 				Title:        "Wish and Swish",
-				Description:  "Makes waste disposals hands-free by automatically opening a trash can when the word \"KOBE\" is spoken. (Ongoing)",
+				Description:  "Makes waste disposals hands-free by automatically opening a trash bin when the word \"KOBE\" is spoken. (Ongoing)",
 				Technologies: "Rust, Raspberry Pi, FFmpeg, Rustpotter-cli, rppal",
 				Link:         "https://github.com/chornge/wish_and_swish",
 			},
