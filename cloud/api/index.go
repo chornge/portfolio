@@ -199,12 +199,6 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 				Link:         "https://github.com/chornge/easy_sermon",
 			},
 			{
-				Title:        "Audio-Epistles",
-				Description:  "Automatically publish new episodes of Spotify podcasts from the latest video in a YouTube playlist. (In Prod)",
-				Technologies: "Rust, Spotify, yt-dlp, chromedriver, FFmpeg, SQLite",
-				Link:         "https://github.com/chornge/audio-epistles",
-			},
-			{
 				Title:        "Wish and Swish",
 				Description:  "Makes waste disposals hands-free by automatically opening a trash bin when the word \"KOBE\" is spoken. (Ongoing)",
 				Technologies: "Rust, Raspberry Pi, FFmpeg, Rustpotter-cli, rppal",
