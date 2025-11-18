@@ -2,7 +2,7 @@
 
 Welcome 🖖🏽 my name is Christian. I am an Android Developer.
 
-You can find my porfolio at https://chornge.com/api
+You can find my porfolio at https://chornge.com
 
 ![](http://estruyf-github.azurewebsites.net/api/VisitorHit?user=chornge&repo=portfolio)
 
