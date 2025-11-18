@@ -18,10 +18,9 @@ const Contact = () => {
         <Card className="p-8 bg-card border-border">
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button variant="default" size="lg" className="glow-primary" asChild>
-              <a 
-                href="https://www.chornge.com/christian+mbaba_resume.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
+              <a
+                href="/christian-mbaba-resume.pdf"
+                download
               >
                 <Download className="w-4 h-4 mr-2" />
                 Download Resume
