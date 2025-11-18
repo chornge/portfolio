@@ -193,12 +193,6 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 				Link:         "https://github.com/chornge/kmpli",
 			},
 			{
-				Title:        "Easy-Sermon",
-				Description:  "Listens for Bible references (John three verse sixteen) then broadcasts `John 3:16 - For God so loved...`. (In Prod)",
-				Technologies: "Rust, Python, Vosk, ProPresenter",
-				Link:         "https://github.com/chornge/easy_sermon",
-			},
-			{
 				Title:        "Wish and Swish",
 				Description:  "Makes waste disposals hands-free by automatically opening a trash bin when the word \"KOBE\" is spoken. (Ongoing)",
 				Technologies: "Rust, Raspberry Pi, FFmpeg, Rustpotter-cli, rppal",
