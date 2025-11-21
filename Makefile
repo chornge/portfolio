@@ -1,5 +1,10 @@
-format:
-	go fmt cloud/api/index.go
+build:
+	pnpm build
+
+lint:
+	pnpm lint
 
 run:
-	go run cloud/api/index.go
+	pnpm dev
+
+all: build lint run
