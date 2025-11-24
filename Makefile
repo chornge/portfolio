@@ -1,10 +1,10 @@
-build:
+frontend-build:
 	pnpm build
 
-lint:
+frontend-lint:
 	pnpm lint
 
-run:
-	pnpm dev
+frontend-dev:
+	pnpm dev -p 4004
 
-all: build lint run
+all: frontend-build frontend-lint frontend-run
