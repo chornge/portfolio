@@ -11,11 +11,11 @@ import Contact from "@/components/contact"
 import Footer from "@/components/footer"
 
 export default function Home() {
-  const [isDark, setIsDark] = useState(true)
+  const [isDark, setIsDark] = useState(false)
 
   useEffect(() => {
     const storedMode = localStorage.getItem("darkMode")
-    const isDarkMode = storedMode !== null ? storedMode === "true" : true
+    const isDarkMode = storedMode !== null ? storedMode === "true" : false
     setIsDark(isDarkMode)
     if (isDarkMode) {
       document.documentElement.classList.add("dark")
