@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion"
 import { Smartphone, Code2, Database, Zap } from "lucide-react"
+import { Analytics } from "@/lib/analytics"
 
 export default function Skills() {
   const skillCategories = [
@@ -104,11 +105,12 @@ export default function Skills() {
                       {category.skills.map((skill, idx) => (
                         <motion.li
                           key={skill}
-                          className="text-sm text-muted-foreground flex items-center gap-2"
+                          className="text-sm text-muted-foreground flex items-center gap-2 cursor-default"
                           initial={{ opacity: 0, x: -10 }}
                           whileInView={{ opacity: 1, x: 0 }}
                           viewport={{ once: true }}
                           transition={{ delay: idx * 0.05, duration: 0.4 }}
+                          onMouseEnter={() => Analytics.skillHovered(skill, category.title)}
                         >
                           <span className="w-1.5 h-1.5 rounded-full bg-primary" aria-hidden="true" />
                           {skill}

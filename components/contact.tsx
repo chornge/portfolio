@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion"
 import { Instagram, Linkedin, Github, ExternalLink } from "lucide-react"
+import { Analytics } from "@/lib/analytics"
 
 export default function Contact() {
   const containerVariants = {
@@ -32,6 +33,7 @@ export default function Contact() {
       href: "https://github.com/chornge",
       color: "from-gray-600 to-gray-800",
       external: true,
+      platform: "github" as const,
     },
     {
       icon: Linkedin,
@@ -40,6 +42,7 @@ export default function Contact() {
       href: "https://www.linkedin.com/in/christian-mbaba-6095ba174",
       color: "from-blue-500 to-cyan-500",
       external: true,
+      platform: "linkedin" as const,
     },
     {
       icon: Instagram,
@@ -48,11 +51,13 @@ export default function Contact() {
       href: "https://www.instagram.com/chornge_",
       color: "from-pink-500 to-orange-500",
       external: true,
+      platform: "instagram" as const,
     },
   ]
 
   const handleDownloadResume = async () => {
     try {
+      Analytics.resumeDownloaded("contact")
       const response = await fetch("/resume")
       const blob = await response.blob()
       const url = window.URL.createObjectURL(blob)
@@ -119,6 +124,7 @@ export default function Contact() {
                     rel={method.external ? "noopener noreferrer" : undefined}
                     className="text-primary hover:underline text-sm flex items-center justify-center gap-1 focus:outline-none focus:ring-2 focus:ring-primary focus:rounded"
                     aria-label={method.external ? `Visit ${method.label} profile (opens in new window)` : undefined}
+                    onClick={() => Analytics.socialLinkClicked(method.platform)}
                   >
                     {method.value}
                     {method.external && <ExternalLink className="w-3 h-3" aria-hidden="true" />}

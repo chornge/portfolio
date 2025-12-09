@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion"
 import { MapPin, Mail, Phone, Clock } from "lucide-react"
+import { Analytics } from "@/lib/analytics"
 
 export default function About() {
   const startDate = new Date("2017-06-01")
@@ -106,7 +107,11 @@ export default function About() {
                   <div className="text-primary mb-2">{item.icon}</div>
                   <p className="text-xs text-muted-foreground mb-1">{item.label}</p>
                   {item.link ? (
-                    <a href={item.link} className="font-semibold text-primary hover:underline text-sm">
+                    <a
+                      href={item.link}
+                      className="font-semibold text-primary hover:underline text-sm"
+                      onClick={() => item.link?.startsWith("mailto:") && Analytics.emailClicked()}
+                    >
                       {item.value}
                     </a>
                   ) : (

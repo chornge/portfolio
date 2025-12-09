@@ -1,10 +1,12 @@
 "use client"
 
+import { Analytics } from "@/lib/analytics"
+
 export default function Footer() {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="bg-card border-t border-border py-12 px-4 sm:px-6 lg:px-8">
+    <footer id="footer" className="bg-card border-t border-border py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
         <div className="grid md:grid-cols-4 gap-8 mb-8">
           <nav>
@@ -14,6 +16,7 @@ export default function Footer() {
                 <a
                   href="#about"
                   className="hover:text-foreground transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:rounded px-1"
+                  onClick={() => Analytics.navigationClicked("about", "footer")}
                 >
                   About
                 </a>
@@ -22,6 +25,7 @@ export default function Footer() {
                 <a
                   href="#skills"
                   className="hover:text-foreground transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:rounded px-1"
+                  onClick={() => Analytics.navigationClicked("skills", "footer")}
                 >
                   Skills
                 </a>
@@ -30,6 +34,7 @@ export default function Footer() {
                 <a
                   href="#process"
                   className="hover:text-foreground transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:rounded px-1"
+                  onClick={() => Analytics.navigationClicked("process", "footer")}
                 >
                   Process
                 </a>
@@ -38,6 +43,7 @@ export default function Footer() {
                 <a
                   href="#experience"
                   className="hover:text-foreground transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:rounded px-1"
+                  onClick={() => Analytics.navigationClicked("experience", "footer")}
                 >
                   Experience
                 </a>
@@ -54,6 +60,7 @@ export default function Footer() {
                   rel="noopener noreferrer"
                   className="hover:text-foreground transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:rounded px-1"
                   aria-label="GitHub (opens in new window)"
+                  onClick={() => Analytics.socialLinkClicked("github")}
                 >
                   GitHub
                 </a>
@@ -65,6 +72,7 @@ export default function Footer() {
                   rel="noopener noreferrer"
                   className="hover:text-foreground transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:rounded px-1"
                   aria-label="LinkedIn (opens in new window)"
+                  onClick={() => Analytics.socialLinkClicked("linkedin")}
                 >
                   LinkedIn
                 </a>
@@ -76,6 +84,7 @@ export default function Footer() {
                   rel="noopener noreferrer"
                   className="hover:text-foreground transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:rounded px-1"
                   aria-label="Instagram (opens in new window)"
+                  onClick={() => Analytics.socialLinkClicked("instagram")}
                 >
                   Instagram
                 </a>
@@ -87,6 +96,7 @@ export default function Footer() {
                   rel="noopener noreferrer"
                   className="hover:text-foreground transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:rounded px-1"
                   aria-label="Book a Session (opens in new window)"
+                  onClick={() => Analytics.sessionBookingClicked()}
                 >
                   Book a Session
                 </a>

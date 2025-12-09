@@ -3,6 +3,7 @@
 import { useState } from "react"
 import Link from "next/link"
 import { Moon, Sun, Menu, X } from "lucide-react"
+import { Analytics } from "@/lib/analytics"
 
 interface HeaderProps {
   isDark: boolean
@@ -50,6 +51,7 @@ export default function Header({ isDark, toggleDarkMode }: HeaderProps) {
                   key={link.href}
                   href={link.href}
                   className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:rounded px-2 py-1"
+                  onClick={() => Analytics.navigationClicked(link.href.replace("#", ""), "header")}
                 >
                   {link.label}
                 </a>
@@ -86,7 +88,10 @@ export default function Header({ isDark, toggleDarkMode }: HeaderProps) {
                   key={link.href}
                   href={link.href}
                   className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-secondary rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-primary"
-                  onClick={() => setIsMenuOpen(false)}
+                  onClick={() => {
+                    Analytics.navigationClicked(link.href.replace("#", ""), "mobile_menu")
+                    setIsMenuOpen(false)
+                  }}
                 >
                   {link.label}
                 </a>
