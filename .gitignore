@@ -19,6 +19,7 @@ yarn-error.log*
 # env files
 .env*
 .claude
+CLAUDE.md
 
 # vercel
 .vercel

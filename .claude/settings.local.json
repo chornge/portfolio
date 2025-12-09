@@ -9,7 +9,11 @@
       "Bash(git remote:*)",
       "Bash(git fetch:*)",
       "Bash(git add:*)",
-      "Bash(pnpm i:*)"
+      "Bash(pnpm i:*)",
+      "Bash(npx -y @posthog/wizard@latest)",
+      "Bash(pnpm add:*)",
+      "Bash(pnpm build:*)",
+      "Bash(pnpm update:*)"
     ],
     "deny": [],
     "ask": []
