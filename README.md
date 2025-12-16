@@ -13,7 +13,7 @@ You can find my porfolio at https://chornge.com
 
 ### Open Source Analytics ⚙️
 
-![Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=chornge&layout=compact&hide=javascript&theme=dark)
+![Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=chornge&layout=compact&hide=typescript,css&theme=dark)
 
 ![Statistics](https://github-readme-stats.vercel.app/api?username=chornge&show_icons=true&include_all_commits=false&hide_title=true&count_private=true&theme=dark)
 
@@ -24,7 +24,7 @@ pnpm install
 pnpm dev
 ```
 
-The site runs at `http://localhost:3001`.
+The site runs on `http://localhost:3000`.
 Use `pnpm lint` before committing and
 `pnpm build && pnpm start` to validate a production build.
 
